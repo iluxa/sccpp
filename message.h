@@ -112,6 +112,10 @@ struct open_receive_channel_ack_message_v17 {
 #define SOFTKEY_SET_REQ_MESSAGE 0x0025
 #define SOFTKEY_TEMPLATE_REQ_MESSAGE 0x0028
 #define REGISTER_AVAILABLE_LINES_MESSAGE 0x002D
+struct register_available_lines_message {
+	uint32_t lines;
+};
+
 #define ACCESSORY_STATUS_MESSAGE 0x0049
 #define REGISTER_ACK_MESSAGE 0x0081
 struct register_ack_message {
@@ -427,6 +431,7 @@ union sccp_data {
 	struct button_template_res_message buttontemplate;
 	struct line_status_req_message line;
 	struct line_status_res_message linestatus;
+	struct register_available_lines_message lines;
 	struct time_date_res_message timedate;
 	struct config_status_res_message configstatus;
 	struct set_lamp_message setlamp;

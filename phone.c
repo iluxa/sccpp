@@ -221,6 +221,7 @@ static int handle_message(struct sccp_msg *msg, struct phone *phone)
 
 		case LINE_STATUS_RES_MESSAGE:
 			handle_line_status_res_message(msg, phone);
+			transmit_forward_status_req_message(phone);
 			break;
 
 		case FORWARD_STATUS_RES_MESSAGE:

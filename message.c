@@ -144,14 +144,35 @@ int transmit_time_date_req_message(struct phone *phone)
 	return 0;
 }
 
+int transmit_forward_status_req_message(struct phone *phone)
+{
+	int ret = 0;
+	struct sccp_msg *msg;
+
+	msg = msg_alloc(sizeof(struct forward_status_req_message), FORWARD_STATUS_REQ_MESSAGE);
+	if (msg == NULL)
+		return -1;
+
+    msg->data.forward.lineNumber = 1;
+
+	ret = transmit_message(msg, phone->session);
+	if (ret == -1)
+		return -1;
+
+	return 0;
+}
+
+
 int transmit_register_available_lines_message(struct phone *phone)
 {
 	int ret = 0;
 	struct sccp_msg *msg;
 
-	msg = msg_alloc(0, REGISTER_AVAILABLE_LINES_MESSAGE);
+	msg = msg_alloc(sizeof(struct register_available_lines_message), REGISTER_AVAILABLE_LINES_MESSAGE);
 	if (msg == NULL)
 		return -1;
+
+    msg->data.lines.lines = 0xff;
 
 	ret = transmit_message(msg, phone->session);
 	if (ret == -1)
